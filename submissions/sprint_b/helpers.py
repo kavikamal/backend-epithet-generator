@@ -1,5 +1,6 @@
 import os
 import json
+import random
 
 
 class FileManager:
@@ -41,3 +42,15 @@ class Vocabulary:
         input_strategies = {'json': cls.from_json}
         if intent is 'read':
             return input_strategies[file_extension]
+
+
+class EpithetGenerator:
+    """Generates an epithet given three columns of data to choose from"""
+    @staticmethod
+    def generate_epithet(path):
+        vocabulary = Vocabulary.from_file(path)
+        return "Thou {} {} {}".format(
+            random.choice(vocabulary["Column 1"]),
+            random.choice(vocabulary["Column 2"]),
+            random.choice(vocabulary["Column 3"])
+        )
